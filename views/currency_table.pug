@@ -1,0 +1,22 @@
+table
+    tbody
+        tr
+            th Country
+            th Currency
+            th Code
+            th Sell
+            th Buy
+        each item in currencies
+            tr
+                td= item.country
+                td= item.currency
+                td= item.code
+                td= item.buy
+                td= item.sell
+p()= date
+form(method="get")
+    label(for="currency") Input currency:
+    input#currency(type="text", placeHolder="Input country or country code of currency", value="USD")
+    label(for="amount") Input amount:
+    input#amount(type="number", value="500")
+    input(type="submit")

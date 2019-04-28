@@ -1,0 +1,26 @@
+{
+  "name": "bankcurrencies",
+  "version": "1.0.0",
+  "description": "Web application which transform currencies to CAD (Canadian dollars)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SerjVankovich/bank_currencies.git"
+  },
+  "author": "Sergey Vankovich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SerjVankovich/bank_currencies/issues"
+  },
+  "homepage": "https://github.com/SerjVankovich/bank_currencies#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.16.4",
+    "pug": "^2.0.3",
+    "puppeteer": "^1.15.0"
+  }
+}
