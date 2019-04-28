@@ -14,9 +14,10 @@ table
                 td= item.buy
                 td= item.sell
 p()= date
-form(method="get")
+form(action="/change" method="post")
     label(for="currency") Input currency:
-    input#currency(type="text", placeHolder="Input country or country code of currency", value="USD")
+    input#currency(name="code" type="text", placeHolder="Input country or country code of currency", value="USD")
     label(for="amount") Input amount:
-    input#amount(type="number", value="500")
+    input#amount(name="amount" type="number", value="500")
+    input#sell(type="hidden", name="sell")
     input(type="submit")

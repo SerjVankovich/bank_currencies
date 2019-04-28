@@ -1,0 +1,13 @@
+table
+    tr
+        th Currency, you change
+        th Your amount in changed currency
+        th Currency, you get
+        th Your amount in getting currency
+        th Currency rate
+    tr
+        td Canadian dollar (CND)
+        td= amount
+        td= currency.code
+        td= amount / currency.sell
+        td= currency.sell
