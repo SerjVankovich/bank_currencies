@@ -1,8 +1,9 @@
 const app = require('express')();
 const express = require('express')
-const URL = require('./config').API
 const localStorage = require('node-localstorage').LocalStorage
-const {scrapeIt, makeRequest} = require('./scrapper')
+const mainController = require('./controllers/mainController').mainController
+const changeController = require('./controllers/changeController').changeController
+const { check } = require('express-validator/check')
 
 const LocalStorage = new localStorage('./local')
 
@@ -11,41 +12,12 @@ app.set('view engine', 'pug')
 
 app.use(express.urlencoded())
 
-app.get('/', (req, res) => {
-    const currencies = JSON.parse(LocalStorage.getItem('currencies'))
-    if (currencies) {
-        const date = new Date(currencies.date.slice(18))
-        const today = new Date()
-        const day = date.getDate()
-        const month = date.getMonth()
-        const year = date.getFullYear()
+app.get('/', mainController(LocalStorage))
 
-        const todayDay = today.getDate()
-        const todayMonth = today.getMonth()
-        const todayYear = today.getFullYear()
+app.post('/change', [
+    check('amount').isFloat().isLength({min: 1}).withMessage("Invalid amount. Amount should be number"),
+    check('code').isLength({min: 3}).withMessage("Invalid currency code. Currency code should be from 3 letters")
+],  changeController(LocalStorage))
 
-        if (day === todayDay && month === todayMonth && year === todayYear) {
-            return res.render('currency_table', currencies)
-        }
-    }
-    scrapeIt(URL).then(currencies => {
-        LocalStorage.setItem('currencies', JSON.stringify(currencies))
-        res.render('currency_table', currencies)
-    })
-    
-})
 
-app.post('/change', (req, res) => {
-    const body = req.body
-    const currencies = JSON.parse(LocalStorage.getItem('currencies'))
-    if (currencies) {
-        const currency = currencies.currencies.find(cur => cur.code.toLowerCase() === body.code.toLowerCase())
-        return res.render('change', {...body, currency})
-    }
-    scrapeIt(URL).then(currencies => {
-        const currency = currencies.currencies.find(cur => cur.code.toLowerCase() === body.code.toLowerCase())
-        res.render('change', {...body, currency})
-    })
-    
-})
 app.listen(3000, () => console.log("Server starts at port 3000"))

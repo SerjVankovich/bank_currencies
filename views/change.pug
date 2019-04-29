@@ -6,8 +6,16 @@ table
         th Your amount in getting currency
         th Currency rate
     tr
-        td Canadian dollar (CND)
+        td Canadian dollar (CAD)
         td= amount
-        td= currency.code
-        td= amount / currency.sell
+        td= currency.currency
+        td= +(amount / currency.sell).toFixed(2)
         td= currency.sell
+h1 You can change your data:
+
+form(action="/change" method="post")
+    label(for="currency") Input currency:
+    input#currency(name="code" type="text", placeHolder="Input country or country code of currency", value=currency.code)
+    label(for="amount") Input amount:
+    input#amount(name="amount" type="number", value=amount)
+    input(type="submit")
