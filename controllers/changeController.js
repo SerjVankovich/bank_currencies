@@ -17,7 +17,7 @@ const validateCurrency = (currency, res, body, date) => {
     }
 }
 
-// Function which compare two strings
+// Function which compare four strings
 const findCurrency = (input, currency) => {
     const handledInput = input.toLowerCase().trim().replace(' ', '')
 
