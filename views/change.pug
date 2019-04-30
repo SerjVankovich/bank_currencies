@@ -11,6 +11,8 @@ table
         td= currency.currency
         td= +(amount / currency.sell).toFixed(2)
         td= currency.sell
+
+h3= date
 h1 You can change your data:
 
 form(action="/change" method="post")
@@ -21,4 +23,3 @@ form(action="/change" method="post")
     input(type="submit")
 
 h2 Make transfer you can on <a href="https://www.bmo.com/home/personal/banking/rates/foreign-exchange">Bank of Montreal</a>
-    

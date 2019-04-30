@@ -1,10 +1,14 @@
+//Libraries import
 const { validationResult } = require('express-validator/check')
-const { scrapeIt } = require('../scrapper')
-const URL = require('../config').API
 
-const validateCurrency = (currency, res, body) => {
+// Modules import
+const URL = require('../config').API
+const { scrapeIt } = require('../scrapper')
+
+// Function which render page. If cerrency on client input was found render change page else render errors page
+const validateCurrency = (currency, res, body, date) => {
     if (currency) {
-        res.render('change', {...body, currency})
+        res.render('change', {...body, currency, date})
     } else {
         res.render('errors', { errors: [{
             value: body.code,
@@ -13,6 +17,7 @@ const validateCurrency = (currency, res, body) => {
     }
 }
 
+// Function which compare two strings
 const findCurrency = (input, currency) => {
     const handledInput = input.toLowerCase().trim().replace(' ', '')
 
@@ -24,8 +29,11 @@ const findCurrency = (input, currency) => {
 
 }
 
+// High order controller
 exports.changeController = LocalStorage => (req, res) => {
     const body = req.body
+
+    // Validate req.body on errors
     const errors = validationResult(req)
 
     if (!errors.isEmpty()) {
@@ -34,14 +42,15 @@ exports.changeController = LocalStorage => (req, res) => {
 
     const currencies = JSON.parse(LocalStorage.getItem('currencies'))
 
+    // If currencies found in LocalStorage render page
     if (currencies) {
         const currency = currencies.currencies.find(cur => findCurrency(body.code, cur))
-        return validateCurrency(currency, res, body)
+        return validateCurrency(currency, res, body, currencies.date)
     }
 
+    // If currencies not found in LocalStorage scrape data from BMO and render page
     scrapeIt(URL).then(currencies => {
         const currency = currencies.currencies.find(cur => findCurrency(body.code, cur))
-        return validateCurrency(currency, res, body)
-    })
-    
+        return validateCurrency(currency, res, body, currencies.date)
+    }) 
 }
