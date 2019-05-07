@@ -39,8 +39,11 @@ exports.changeController = LocalStorage => (req, res) => {
     if (!errors.isEmpty()) {
         return res.render('errors', {errors: errors.array()})
     }
-
-    const currencies = JSON.parse(LocalStorage.getItem('currencies'))
+    
+    let currencies
+    try {
+        currencies = JSON.parse(LocalStorage.getItem('currencies'))
+    } catch {}
 
     // If currencies found in LocalStorage render page
     if (currencies) {
