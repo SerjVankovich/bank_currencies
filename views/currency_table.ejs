@@ -1,0 +1,33 @@
+<table>
+    <tbody>
+        <tr>
+            <th>Country</th>
+            <th>Currency</th>
+            <th>Code</th>
+            <th>Sell</th>
+            <th>Buy</th>
+        </tr>
+            <% for(let i=0; i<currencies.length;i++) {%>
+                <tr><%=currencies[i].country %></tr>
+                <tr><%=currencies[i].currency %></tr>
+                <tr><%=currencies[i].code %></tr>
+                <tr><%=currencies[i].sell %></tr>
+                <tr><%=currencies[i].buy %></tr>
+            <%} %>
+    </tbody>
+</table>
+
+<h2><%=date %></h2>
+
+<form action="/change" method="post">
+    <label for="currency">Input currency:</label>
+    <input id="currency" placeholder="Input country or country code of currency" name="code" type="text" value="USD">
+    <label for="amount">Input amount:</label>
+    <input id="amount" name="amount" type="number" value="500">
+    <input type="submit">
+</form>
+
+<h2>
+    Make transfer you can on <a href="https://www.bmo.com/home/personal/banking/rates/foreign-exchange">Bank of Montreal</a>
+</h2> 
+

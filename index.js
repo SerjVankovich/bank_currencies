@@ -13,7 +13,7 @@ const LocalStorage = new localStorage('./local')
 
 // Set template package and Pug Engine
 app.set('views', `./views`)
-app.set('view engine', 'pug')
+app.set('view engine', 'ejs')
 
 // Set Body parser
 app.use(express.urlencoded())

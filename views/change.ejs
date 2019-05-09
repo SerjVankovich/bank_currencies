@@ -1,0 +1,29 @@
+<table>
+    <tr>
+        <th>Currency, you change</th>
+        <th>Your amount in changed currency</th>
+        <th>Currency, you get</th>
+        <th>Your amount in getting currency</th>
+        <th>Currency rate</th>
+    </tr>
+    <tr>
+        <td>Canadian dollar (CAD)</td>
+        <td><%=amount %></td>
+        <td><%=currency.currency %></td>
+        <td><%= +(amount / currency.sell).toFixed(2) %></td>
+        <td><%=currency.sell %></td>
+    </tr>
+</table>
+<h3><%=date %></h3>
+
+<h1>You can change your data</h1>
+<form action="/change" method="post">
+    <label for="currency">Input currency:</label>
+    <input id="currency" placeholder="Input country or country code of currency" name="code" type="text" value=<%=currency.code %>>
+    <label for="amount">Input amount:</label>
+    <input id="amount" name="amount" type="number" value=<%=amount %>>
+    <input type="submit">
+</form>
+<h2>
+    Make transfer you can on <a href="https://www.bmo.com/home/personal/banking/rates/foreign-exchange">Bank of Montreal</a>
+</h2> 
