@@ -8,11 +8,13 @@
             <th>Buy</th>
         </tr>
             <% for(let i=0; i<currencies.length;i++) {%>
-                <tr><%=currencies[i].country %></tr>
-                <tr><%=currencies[i].currency %></tr>
-                <tr><%=currencies[i].code %></tr>
-                <tr><%=currencies[i].sell %></tr>
-                <tr><%=currencies[i].buy %></tr>
+                <tr>
+                    <td><%=currencies[i].country %></td>
+                    <td><%=currencies[i].currency %></td>
+                    <td><%=currencies[i].code %></td>
+                    <td><%=currencies[i].sell %></td>
+                    <td><%=currencies[i].buy %></td>
+                </tr>
             <%} %>
     </tbody>
 </table>
